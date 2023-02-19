@@ -22,16 +22,19 @@ class PlayersController < ApplicationController
 
   # POST /players or /players.json
   def create
-    @player = Player.new(player_params)
+
+    if(Player.all.where(user_id: player_params[:user_id]).count < 20 && Player.all.where(player_id: player_params[:player_id]).count === 0)
+      @player = Player.new(player_params)
 
     respond_to do |format|
       if @player.save
         format.html { render :new, status: :created }
-        format.json { render :show, status: :created, location: @player }
+        format.json { render :show, status: :created }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @player.errors, status: :unprocessable_entity }
       end
+    end
     end
   end
 
