@@ -63,7 +63,7 @@ class PlayersController < ApplicationController
 
   def delete
     player = Player.all
-    playerToDestroy = player.where(player_id: params[:player_id])
+    playerToDestroy = player.where(player_id: params[:player_id] , user_id: params[:user_id])
     playerToDestroy.destroy_all
     respond_to do |format|
       format.html { redirect_to players_url, notice: "Player was successfully destroyed." }
