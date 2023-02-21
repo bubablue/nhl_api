@@ -52,9 +52,19 @@ class PlayersController < ApplicationController
   end
 
   # DELETE /players/1 or /players/1.json
-  def destroy
-    @player.destroy
+  # def destroy
+  #   player = Player.find(params[:player_id])
+  #   player.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to players_url, notice: "Player was successfully destroyed." }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
+  def delete
+    player = Player.all
+    playerToDestroy = player.where(player_id: params[:player_id])
+    playerToDestroy.destroy_all
     respond_to do |format|
       format.html { redirect_to players_url, notice: "Player was successfully destroyed." }
       format.json { head :no_content }
