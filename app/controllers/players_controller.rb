@@ -8,7 +8,10 @@ class PlayersController < ApplicationController
   end
 
   # GET /players/1 or /players/1.json
-  def show; end
+  def show
+    players = Player.all.where(user_id: params[:user_id], player_id: params[:player_id])
+    render json: players
+  end
 
   # GET /players/new
   def new
